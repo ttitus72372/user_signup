@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="/add" method="POST">
+<table>
+    <tr>
+        <td>
+            <labeL for="username">Username</labeL>
+        </td>
+        <td>
+            <input name="username" value="{{Username}}" type="text">
+            <span class="error"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+           <label for="password">Password</label> 
+        </td>
+        <td>
+            <input name="password" type="password">
+            <span class="error"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="verify">Verify Password</label>
+        </td>
+        <td>
+            <input name="verify" type="password">
+            <span class="error"></span> 
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="email">Email (optinal)</label>
+        </td>
+        <td>
+            <input name="email" value="{{Email}}">
+            <span class="error"></span>
+        </td>
+    </tr>
+</table>
+<input type="submit">
+</form>
+{% endblock %}
