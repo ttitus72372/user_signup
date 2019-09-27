@@ -12,39 +12,49 @@ def signup():
     Password = request.form['password']
     Verify = request.form['verify']
     Email = request.form['email']
-        
+    Uerror = ""
+    Perror = ""
+    Verror = ""
+    Eerror = ""
     
     if Username.strip() == "":
-        error = "Username is blank, you must input a Username."
-        return redirect("/?error=" + error)
-
-    if Password.strip() == "":
-        error = "Passwrod is blank, you must set up a Password."
-        return redirect("/?error=" + error)
-
-    if Verify.strip() == "":
-        error = "You must verfiy your password!"
-        return redirect("/?error=" + error)
+        Uerror = "Username is blank, you must input a Username."
+        return render_template('edit.html', User_error=Uerror)
     
     if len(Username) < 3 or len(Username) > 20:
-        error = "Your Username is either to short or to long, make sure it is between 3 and 20 characters long."
-        return redirect("/?error=" + error)
-    
-    if len(Password) < 3 or len(Password) > 20:
-        error = "Your password is either to short or to long, make sure it is between 3 and 20 characters long."
-        return redirect("/?error=" + error)
+        Uerror = "Your Username is either to short or to long, make sure it is between 3 and 20 characters long."
+        return render_template('edit.html', User_error=Uerror)
     
     if " " in Username:
-        error = "There is a space in your Uername"
-        return redirect("/?error=" + error)
+        Uerror = "There is a space in your Uername"
+        return render_template('edit.html', User_error=Uerror)
+   
+    if Password.strip() == "":
+        Perror = "Passwrod is blank, you must set up a Password."
+        return render_template('edit.html', Pass_error=Perror)
 
+    if len(Password) < 3 or len(Password) > 20:
+        Perror = "Your password is either to short or to long, make sure it is between 3 and 20 characters long."
+        return render_template('edit.html', Pass_error=Perror)
+    
     if " " in Password:
-        error = "There is a space in your Password"
-        return redirect("/?error=" + error)
-
+        Perror = "There is a space in your Password"
+        return render_template('edit.html', Pass_error=Perror)
+    
+    if Verify.strip() == "":
+        Verror = "You must verfiy your password!"
+        return render_template('edit.html', Verify_error=Verror)
+    
     if Password != Verify:
-        error = "You passwords do not macth!"
-        return redirect("/?error=" + error)
+        Verror = "You passwords do not macth!"
+        return render_template('edit.html', Verify_error=Verror)
+    
+    
+    
+
+    
+
+    
     if Email.strip() != "":
         atsym = 0
         dot = 0
@@ -54,18 +64,23 @@ def signup():
             if x == ".":
                 dot += 1
         if atsym > 1 or atsym < 1:
-            E1error = "You have more than one @ symbol or no @ symbol in your email."
-            return redirect("/?error=" + E1error)
+            Eerror = "You have more than one at symbol or no at symbol in your email."
+            return render_template('edit.html', Email_error=Eerror)
+
         if dot > 1 or dot < 1:
-            E2error = "You have more than one @ symbol or no @ symbol in your email."
-            return redirect("/?error=" + E2error)
+            Eerror = "You have more than one dot symbol or no dot symbol in your email."
+            return render_template('edit.html', Email_error=Eerror)
+         
         if " " in Email:
-            E3error = "There is a space in your email"
-            return redirect("/?error=" + E3error)
+            Eerror = "There is a space in your email"
+            return render_template('edit.html', Email_error=Eerror)
+        
         if len(Email) < 3 or len(Email) > 20:
-            E4error = "Your Email is either to short or to long, make sure it is between 3 and 20 characters long."
+            Eerror = "Your Email is either to short or to long, make sure it is between 3 and 20 characters long."
             email_length = len(Email)
-            return redirect("/?error=" + E4error + "The number of characters in your email is:" +str(email_length))
+            return render_template('edit.html', Email_error=Eerror)
+        
+            
 
     Username_escaped = cgi.escape(Username, quote=True)
     Password_escaped = cgi.escape(Password, quote=True)
