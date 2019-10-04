@@ -17,44 +17,28 @@ def signup():
     Verror = ""
     Eerror = ""
     
+
+
+
     if Username.strip() == "":
-        Uerror = "Username is blank, you must input a Username."
-        return render_template('edit.html', User_error=Uerror)
-    
-    if len(Username) < 3 or len(Username) > 20:
-        Uerror = "Your Username is either to short or to long, make sure it is between 3 and 20 characters long."
-        return render_template('edit.html', User_error=Uerror)
-    
-    if " " in Username:
+        Uerror = "Username is blank, you must input a Username."   
+    elif " " in Username:
         Uerror = "There is a space in your Uername"
-        return render_template('edit.html', User_error=Uerror)
-   
+    elif len(Username) < 3 or len(Username) > 20:
+        Uerror = "Your Username is either to short or to long, make sure it is between 3 and 20 characters long."
+    
     if Password.strip() == "":
         Perror = "Passwrod is blank, you must set up a Password."
-        return render_template('edit.html', Pass_error=Perror)
-
-    if len(Password) < 3 or len(Password) > 20:
+    elif len(Password) < 3 or len(Password) > 20:
         Perror = "Your password is either to short or to long, make sure it is between 3 and 20 characters long."
-        return render_template('edit.html', Pass_error=Perror)
-    
-    if " " in Password:
+    elif " " in Password:
         Perror = "There is a space in your Password"
-        return render_template('edit.html', Pass_error=Perror)
-    
+
     if Verify.strip() == "":
         Verror = "You must verfiy your password!"
-        return render_template('edit.html', Verify_error=Verror)
-    
-    if Password != Verify:
-        Verror = "You passwords do not macth!"
-        return render_template('edit.html', Verify_error=Verror)
-    
-    
-    
-
-    
-
-    
+    elif Password != Verify:
+        Verror = "You passwords do not macth!"   
+     
     if Email.strip() != "":
         atsym = 0
         dot = 0
@@ -65,20 +49,13 @@ def signup():
                 dot += 1
         if atsym > 1 or atsym < 1:
             Eerror = "You have more than one at symbol or no at symbol in your email."
-            return render_template('edit.html', Email_error=Eerror)
-
-        if dot > 1 or dot < 1:
+        elif dot > 1 or dot < 1:
             Eerror = "You have more than one dot symbol or no dot symbol in your email."
-            return render_template('edit.html', Email_error=Eerror)
-         
-        if " " in Email:
+        elif " " in Email:
             Eerror = "There is a space in your email"
-            return render_template('edit.html', Email_error=Eerror)
-        
-        if len(Email) < 3 or len(Email) > 20:
+        elif len(Email) < 3 or len(Email) > 20:
             Eerror = "Your Email is either to short or to long, make sure it is between 3 and 20 characters long."
-            email_length = len(Email)
-            return render_template('edit.html', Email_error=Eerror)
+    return render_template('edit.html', User_error=Uerror, Pass_error=Perror, Verify_error=Verror,Email_error=Eerror)
         
             
 
